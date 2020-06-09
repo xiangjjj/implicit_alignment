@@ -44,7 +44,7 @@ domain_adaptation
 ```
 During training, the model loads the data in `domain_adaptation` directory where the label information is specified in the form of `(img, label)` pairs.
 
-As an example, the file names and labels of the imbalanced Office-Home (RS-UT) are defined in [./domain_adaptation/data/office-home-imbalanced](ai/domain_adaptation/data/office-home-imbalanced) (kindly provided by Shuhan Tan in the [COAL](https://arxiv.org/abs/1910.10320) paper, and we thank them for providing the data split).
+As an example, the file names and labels of the imbalanced Office-Home (RS-UT) are defined in [ai/domain_adaptation/data/office-home-imbalanced](ai/domain_adaptation/data/office-home-imbalanced) (kindly provided by Shuhan Tan in the [COAL](https://arxiv.org/abs/1910.10320) paper, and we thank them for providing the data split).
 
 
 Note that in [setup.py](./setup.py), we define an entry point `implicit_alignment`, which will be used to run our code.
