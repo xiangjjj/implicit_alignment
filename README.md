@@ -1,7 +1,7 @@
 # Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation
-This is the code for our paper: Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation.
+This is the code for our ICML2020 paper: Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation.
 
-The code was adapted from https://github.com/thuml/MDD.
+The code was in part adapted from https://github.com/thuml/MDD.
 ## Installation
 Install implicit alignment and its dependencies as a Python module:
 ```bash
@@ -66,7 +66,7 @@ Please make sure to **change** the `datapath := /your/data/path` to your own dat
 ### Training with command line arguments
 
 To train the model with command line arguments, one needs to specify the `--dataset_dir` to the `domain_adaptation` data directory that we created.
-All `argparse` commands are defined in [./domain_adaptation/main.py](ai/domain_adaptation/main.py).
+All `argparse` commands are defined in [ai/domain_adaptation/main.py](ai/domain_adaptation/main.py).
 During training, the model stores its training log in the `tensorboard` directory.
 
 Please find the scripts for different models and datasets in the following makefiles [ai/domain_adaptation/makefiles](./ai/domain_adaptation/makefiles/Makefile):
@@ -100,9 +100,9 @@ implicit_alignment \
 
 
 ## Main source files
-- [./MDD/model/MDD.py](ai/domain_adaptation/models/MDD.py): MDD as domain divergence measure, together with explicit alignment
-- [./MDD/preprocess/sampler.py](ai/domain_adaptation/datasets/sampler.py): implicit class-aligned sampling
-- [./MDD/trainer/train.py](ai/domain_adaptation/main.py): main file
+- [ai/domain_adaptation/models/MDD.py](ai/domain_adaptation/models/MDD.py): MDD as domain divergence measure, together with explicit alignment
+- [ai/domain_adaptation/datasets/sampler.py](ai/domain_adaptation/datasets/sampler.py): implicit class-aligned sampling
+- [ai/domain_adaptation/main.py](ai/domain_adaptation/main.py): main file
 
 ## Issues
 Please create an [issue](https://github.com/xiangdal/implicit_alignment/issues) if you have any problem, bug, or feature request with this code. Thank you!
