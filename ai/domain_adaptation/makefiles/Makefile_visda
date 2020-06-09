@@ -1,0 +1,55 @@
+train-visda-baseline:
+	implicit_alignment  \
+    --datasets_dir $(datapath) \
+    --optimizer_config ../config/sgd_0.004.yml \
+    --dataset VisDA \
+    --class_num 12 \
+    --src_address ../data/VisDA/train.txt \
+    --tgt_address ../data/VisDA/valid.txt \
+    --name visda.baseline.RandomCrop \
+    --train_steps 100000 \
+    --seed 0 \
+    --eval_interval 500 \
+    --machine $(UNAME_N) \
+    --tensorboard_dir $(tensorboardpath) \
+    --mask_classifier --mask_divergence --group_name visda --batch_size 48 \
+    --disable_prompt
+
+train-visda-explicit:
+	implicit_alignment  \
+    --datasets_dir $(datapath) \
+    --optimizer_config ../config/sgd_0.004.yml \
+    --dataset VisDA \
+    --class_num 12 \
+    --src_address ../data/VisDA/train.txt \
+    --tgt_address ../data/VisDA/valid.txt \
+    --name visda.explicit.RandomCrop \
+    --train_steps 100000 \
+    --seed 0 \
+    --eval_interval 500 \
+    --machine $(UNAME_N) \
+    --tensorboard_dir $(tensorboardpath) \
+    --mask_classifier --mask_divergence --group_name visda --batch_size 48 \
+    --proto_loss --moving_centroid --group_name visda --disable_prompt \
+    --proto_curriculum --protoloss_weight 0.2 --proto_decay_rate 0.3 --disable_prompt
+
+train-visda-implicit:
+	implicit_alignment  \
+    --datasets_dir $(datapath) \
+    --optimizer_config ../config/sgd_0.004.yml \
+    --dataset VisDA \
+    --class_num 12 \
+    --src_address ../data/VisDA/train.txt \
+    --tgt_address ../data/VisDA/valid.txt \
+    --name visda.implicit.RandomCrop \
+    --train_steps 100000 \
+    --seed 0 \
+    --eval_interval 500 \
+    --source_sample_mode --n_way 12 --k_shot 4 \
+    --machine $(UNAME_N) \
+    --tensorboard_dir $(tensorboardpath) \
+    --mask_classifier --mask_divergence --group_name visda --batch_size 48 \
+    --self_train --yhat_update_freq 400 --self_train_sampler SelfTrainingVannilaSampler \
+    --resize_size 176 --crop_size 160 \
+    --crop_type RandomCrop \
+    --disable_prompt

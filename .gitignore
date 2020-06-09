@@ -1,0 +1,14 @@
+ai/domain_adaptation/makefiles/tensorboard
+ai/pickles
+
+*.pyc
+*.log
+*.mat
+*.jpg
+*.pt
+*.swp
+mda.egg-info
+.ruby-version
+*.swo
+*.npy
+.idea

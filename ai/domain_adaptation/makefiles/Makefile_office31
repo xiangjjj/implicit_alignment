@@ -1,0 +1,38 @@
+office31.A2W.MDD:
+	implicit_alignment \
+    --datasets_dir $(datapath) \
+    --optimizer_config ../config/sgd_0.001.yml \
+    --seed 5 \
+    --dataset Office-31 \
+    --class_num 31 \
+    --src_address ../data/office31/amazon.txt \
+    --tgt_address ../data/office31/webcam.txt \
+    --name MDD.baseline \
+    --machine $(UNAME_N) \
+    --tensorboard_dir $(tensorboardpath) \
+    --train_steps 10000 \
+    --eval_interval 50  --batch_size 31 \
+    --train_loss total_loss --group_name office_31  \
+    --bottleneck_dim 1024 \
+    --disable_prompt
+
+office31.A2W.implicit:
+	implicit_alignment \
+    --datasets_dir $(datapath) \
+    --optimizer_config ../config/sgd_0.001.yml \
+    --seed 5 \
+    --dataset Office-31 \
+    --class_num 31 \
+    --src_address ../data/office31/amazon.txt \
+    --tgt_address ../data/office31/webcam.txt \
+    --name implicit \
+    --machine $(UNAME_N) \
+    --tensorboard_dir $(tensorboardpath) \
+    --train_steps 10000 \
+    --eval_interval 50  --batch_size 31 \
+    --train_loss total_loss --group_name office_31  \
+    --bottleneck_dim 1024 \
+    --mask_classifier --mask_divergence \
+    --source_sample_mode --n_way 31 --k_shot 1 \
+    --self_train --yhat_update_freq 20 --self_train_sampler SelfTrainingVannilaSampler --disable_prompt
+
