@@ -1,7 +1,10 @@
 # Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation
-This is the code for our ICML2020 paper: Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation.
+This is the code for our ICML2020 paper: Implicit Class-Conditioned Domain Alignment for Unsupervised Domain Adaptation (Xiang Jiang, Qicheng Lao, Stan Matwin, Mohammad Havaei).
 
-The code was in part adapted from https://github.com/thuml/MDD.
+Paper: https://arxiv.org/abs/2006.04996
+
+Blog: https://sites.google.com/view/implicit-alignment
+
 ## Installation
 Install implicit alignment and its dependencies as a Python module:
 ```bash
@@ -100,6 +103,8 @@ implicit_alignment \
 
 
 ## Main source files
+The code was in part adapted from https://github.com/thuml/MDD.
+
 - [ai/domain_adaptation/models/MDD.py](ai/domain_adaptation/models/MDD.py): MDD as domain divergence measure, together with explicit alignment
 - [ai/domain_adaptation/datasets/sampler.py](ai/domain_adaptation/datasets/sampler.py): implicit class-aligned sampling
 - [ai/domain_adaptation/main.py](ai/domain_adaptation/main.py): main file
