@@ -5,6 +5,8 @@ Paper: https://arxiv.org/abs/2006.04996
 
 Blog: https://sites.google.com/view/implicit-alignment
 
+Slides: https://github.com/xiangdal/implicit_alignment/raw/master/slides.pdf
+
 ## Installation
 Install implicit alignment and its dependencies as a Python module:
 ```bash
@@ -81,22 +83,23 @@ Please find the scripts for different models and datasets in the following makef
 For example, to run Rw->Pr on the imbalanced Office-Home (RS-UT) with implicit alignment:
 ```bash
 implicit_alignment \
-    --datasets_dir [yourdatadirectory] \
+    --datasets_dir $(datapath) \
     --optimizer_config ../config/sgd_0.001.yml \
     --dataset Office-Home \
     --class_num 65 \
     --src_address ../data/office-home-imbalanced/Real_World_RS.txt \
     --tgt_address ../data/office-home-imbalanced/Product_UT.txt \
-    --name MDD.baseline \
+    --name MDD.implicit \
     --train_steps 50000 \
     --seed 10 \
     --eval_interval 50 \
-    --machine $(UNAME_N) \
     --tensorboard_dir $(tensorboardpath) \
     --batch_size 50 \
     --mask_classifier --mask_divergence \
-    --train_loss total_loss --group_name office_home \
+    --train_loss total_loss --group_name office_home_rsut  \
     --bottleneck_dim 2048  \
+    --source_sample_mode --n_way 50 --k_shot 1 \
+    --self_train --yhat_update_freq 20 --self_train_sampler SelfTrainingVannilaSampler \
     --disable_prompt
 ```
 
