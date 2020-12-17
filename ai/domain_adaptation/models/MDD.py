@@ -8,24 +8,22 @@ import numpy as np
 
 
 class GradientReverseLayer(torch.autograd.Function):
-    def __init__(self, iter_num=0, grl_config=None):
-        self.iter_num = iter_num
-        self.alpha = grl_config.grl.alpha
-        self.low_value = grl_config.grl.low_value
-        self.high_value = grl_config.grl.high_value
-        self.max_iter = grl_config.grl.max_iter
+    iter_num = 0
 
-    def forward(self, input):
-        self.iter_num += 1
+    @staticmethod
+    def forward(ctx, input):
+        GradientReverseLayer.iter_num += 1
         output = input * 1.0
         return output
 
-    def backward(self, grad_output):
-        self.coeff = np.float(
-            2.0 * (self.high_value - self.low_value) / (1.0 + np.exp(-self.alpha * self.iter_num / self.max_iter))
-            - (self.high_value - self.low_value) + self.low_value
+    @staticmethod
+    def backward(ctx, grad_output):
+        coeff = np.float(
+            2.0 * (GradientReverseLayer.high_value - GradientReverseLayer.low_value) /
+            (1.0 + np.exp(-GradientReverseLayer.alpha * GradientReverseLayer.iter_num / GradientReverseLayer.max_iter))
+            - (GradientReverseLayer.high_value - GradientReverseLayer.low_value) + GradientReverseLayer.low_value
         )
-        return -self.coeff * grad_output
+        return - coeff * grad_output
 
 
 class MDDNet(nn.Module, AbstractModel):
@@ -41,9 +39,13 @@ class MDDNet(nn.Module, AbstractModel):
 
         self.base_network = backbone.network_dict[base_net]()
 
-        self.use_bottleneck = use_bottleneck
-        self.grl_layer = GradientReverseLayer(grl_config=grl_config)
+        # init GradientReverseLayer parameterGradientReverseLayers
+        GradientReverseLayer.alpha = grl_config.grl.alpha
+        GradientReverseLayer.low_value = grl_config.grl.low_value
+        GradientReverseLayer.high_value = grl_config.grl.high_value
+        GradientReverseLayer.max_iter = grl_config.grl.max_iter
 
+        self.use_bottleneck = use_bottleneck
         self.create_bottleneck_layer(use_dropout=not disable_dropout)
 
         self.create_f_and_fhat_classifiers(
@@ -103,7 +105,7 @@ class MDDNet(nn.Module, AbstractModel):
         softmax_outputs = self.softmax(outputs)
 
         # gradient reversal layer helps fuse the minimax problem into one loss function
-        features_adv = self.grl_layer(features)
+        features_adv = GradientReverseLayer.apply(features)
         outputs_adv = self.classifier_layer_2(features_adv)
 
         return features, outputs, softmax_outputs, outputs_adv
