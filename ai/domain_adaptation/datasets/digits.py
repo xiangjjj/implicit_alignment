@@ -47,6 +47,8 @@ class mnist(datasets.MNIST, CustomClassSubset):
         if subset_indices is not None:
             self.targets = self.labels = self.labels[subset_indices]
             self.data = self.data[subset_indices]
+        else:
+            self.targets = self.labels
 
     def __getitem__(self, index):
         img, target = super().__getitem__(index)
@@ -81,6 +83,8 @@ class svhn(datasets.SVHN, CustomClassSubset):
         if subset_indices is not None:
             self.targets = self.labels = self.labels[subset_indices]
             self.data = self.data[subset_indices]
+        else:
+            self.targets = self.labels
 
     def __getitem__(self, index):
         img, target = super().__getitem__(index)
