@@ -34,7 +34,8 @@ class mnist(datasets.MNIST, CustomClassSubset):
         self.labels = self.targets.numpy()
         subset_dict_train = {
             'mild_unbalance': [542, 1084, 1626, 2168, 2710, 3252, 3794, 4336, 4878, 5421],
-            'extreme_unbalance': [107,  164,  253,  389,  601,  930, 1441, 2237, 3479, 5421]
+            'extreme_unbalance': [107,  164,  253,  389,  601,  930, 1441, 2237, 3479, 5421],
+            'balanced': None
         }
         subset_test = [89, 178, 267, 356, 446, 535, 624, 713, 802, 892]
 
@@ -42,8 +43,10 @@ class mnist(datasets.MNIST, CustomClassSubset):
             subset_indices = subset_dict_train[unbalance_type]
         else:
             subset_indices = self.get_subset_indices(p=subset_test)
-        self.targets = self.labels = self.labels[subset_indices]
-        self.data = self.data[subset_indices]
+
+        if subset_indices is not None:
+            self.targets = self.labels = self.labels[subset_indices]
+            self.data = self.data[subset_indices]
 
     def __getitem__(self, index):
         img, target = super().__getitem__(index)
@@ -65,7 +68,8 @@ class svhn(datasets.SVHN, CustomClassSubset):
         # use `reversed` to simulate RS-UT
         subset_dict_train = {
             'mild_unbalance': list(reversed([465,  931, 1397, 1863, 2329, 2795, 3261, 3727, 4193, 4659])),
-            'extreme_unbalance': list(reversed([92,  141,  217,  335,  517,  799, 1238, 1922, 2990, 4659]))
+            'extreme_unbalance': list(reversed([92,  141,  217,  335,  517,  799, 1238, 1922, 2990, 4659])),
+            'balanced': None
         }
         subset_test = list(reversed([159,  319,  478,  638,  797,  957, 1116, 1276, 1435, 1595]))
 
@@ -73,8 +77,10 @@ class svhn(datasets.SVHN, CustomClassSubset):
             subset_indices = self.get_subset_indices(subset_dict_train[unbalance_type])
         else:
             subset_indices = self.get_subset_indices(p=subset_test)
-        self.targets = self.labels = self.labels[subset_indices]
-        self.data = self.data[subset_indices]
+
+        if subset_indices is not None:
+            self.targets = self.labels = self.labels[subset_indices]
+            self.data = self.data[subset_indices]
 
     def __getitem__(self, index):
         img, target = super().__getitem__(index)
