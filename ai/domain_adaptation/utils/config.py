@@ -1,8 +1,3 @@
-from easydict import EasyDict as edict
-import yaml
-
-
-def parse_yaml_to_dict(filename):
-    with open(filename, 'r') as f:
-        parser = edict(yaml.load(f, Loader=yaml.FullLoader))
-    return parser
+version https://git-lfs.github.com/spec/v1
+oid sha256:cb5e6b5f66bdbd27a9a16f0033e2d7dfe37137c73d6f55085713e2378556ec4c
+size 209

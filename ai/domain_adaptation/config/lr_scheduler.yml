@@ -1,4 +1,3 @@
-lr_scheduler:
-  type: INVScheduler
-  gamma: 0.001
-  decay_rate: 0.75
+version https://git-lfs.github.com/spec/v1
+oid sha256:4a9a8ed1d3510365fc0c8f89958695980f9269c3e2fb1af5d04d0a45edebb431
+size 68

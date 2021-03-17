@@ -1,14 +1,3 @@
-ai/domain_adaptation/makefiles/tensorboard
-ai/pickles
-
-*.pyc
-*.log
-*.mat
-*.jpg
-*.pt
-*.swp
-mda.egg-info
-.ruby-version
-*.swo
-*.npy
-.idea
+version https://git-lfs.github.com/spec/v1
+oid sha256:7a77542272683d11626ba51501fa71e799cd479181642e070c80fe592a0fdcb3
+size 134

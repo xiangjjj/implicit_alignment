@@ -1,9 +1,3 @@
-import torch
-
-
-def train_batch(model_instance, inputs_source, labels_source, inputs_target, optimizer, args, step_num=0):
-    inputs = torch.cat((inputs_source, inputs_target), dim=0)
-    total_loss, train_stats = model_instance.get_loss(inputs, labels_source, step_num)
-    total_loss[args.train_loss].backward()
-    optimizer.step()
-    return train_stats
+version https://git-lfs.github.com/spec/v1
+oid sha256:bf217c1b36fe73bb365290b090016bc4318d368dd017d573a7251b915435cb9c
+size 358

@@ -1,18 +1,3 @@
-import torch
-import torch.nn.functional as F
-
-
-def get_proximal_loss(source_param, target_param, scale=0.00001):
-    loss = 0
-    for s, t in zip(source_param.parameters(), target_param.parameters()):
-        loss += torch.norm(s - t, 2)
-    return loss * scale
-
-
-def get_entropy_loss(logits=None, prob=None, temperature=1):
-    if logits is not None:
-        prob = F.softmax(logits / temperature, dim=1)
-    entropy = - prob * torch.log(prob + 1e-8)
-    entropy = entropy.sum(dim=-1)
-    entropy = entropy.mean()
-    return entropy
+version https://git-lfs.github.com/spec/v1
+oid sha256:054c4d8031a1d5e18b887f9224699c4502ae6edd954cd4830c4c6ae4fa4d337f
+size 534

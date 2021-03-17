@@ -1,7 +1,3 @@
-optim:
-  type: SGD
-  params:
-      lr: 0.001
-      momentum: 0.9
-      weight_decay: 0.0005
-      nesterov: True
+version https://git-lfs.github.com/spec/v1
+oid sha256:f7aa2732bb25f96ad71e2228ff4d2e27eaf49528fec00b43f5e1b9839e662bf5
+size 113

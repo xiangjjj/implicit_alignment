@@ -1,34 +1,3 @@
-# baselines
-train.OfficeHome.A2C.65class.baseline:
-	implicit_alignment \
-    --datasets_dir $(datapath) \
-    --optimizer_config ../config/sgd_0.001.yml \
-    --seed 2 \
-    --dataset Office-Home \
-    --class_num 65 \
-    --src_address ../data/office-home/Art.txt \
-    --tgt_address ../data/office-home/Clipart.txt \
-    --name MDD.baseline \
-    --machine $(UNAME_N) \
-    --tensorboard_dir $(tensorboardpath) \
-    --train_steps 100000 \
-    --eval_interval 50  --batch_size 50
-
-train-OfficeHome-A2C-all-classes-50way-1shot-implicit:
-	implicit_alignment \
-    --datasets_dir $(datapath) \
-    --optimizer_config ../config/sgd_0.001.yml \
-    --dataset Office-Home \
-    --class_num 65 \
-    --src_address ../data/office-home/Art.txt \
-    --tgt_address ../data/office-home/Clipart.txt \
-    --name implicit \
-    --train_steps 100000 \
-    --seed 2 \
-    --eval_interval 50 \
-    --source_sample_mode --n_way 50 --k_shot 1 \
-    --machine $(UNAME_N) \
-    --tensorboard_dir $(tensorboardpath) \
-    --mask_classifier --mask_divergence --group_name final --batch_size 50 \
-    --self_train --yhat_update_freq 20 --self_train_sampler SelfTrainingVannilaSampler
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:d847eb611fb3063b8ce1ea25c2aef42e01563317a21eb6ef52132a9df52a1dbc
+size 1164
